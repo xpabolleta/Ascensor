@@ -1,4 +1,4 @@
-[class]{
+[class],#popup{
     border: 1px solid black;
     margin: 5px;
 }
@@ -78,6 +78,9 @@
     position: fixed;
     left: 33%;
     top: 20%;
+}
+.caja{
+    background-color: red;
 }
 
 @keyframes abrir_puerta{
