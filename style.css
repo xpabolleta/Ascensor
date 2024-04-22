@@ -1,0 +1,91 @@
+[class]{
+    border: 1px solid black;
+    margin: 5px;
+}
+.control{
+    width: 15%;
+    position: fixed;
+    right: 5%;
+    top: 5%;
+}
+.piso{
+    display: grid;
+    grid-template-columns: 33% 33% auto;
+    grid-template-rows: 100%;
+    width: 75%;
+}
+.pos_ascensor{
+    display: grid;
+    grid-template-columns: min-content auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+    ". display display"
+    "button lift lift";
+}
+.ascensor{
+    z-index: -2;
+    grid-area: lift;
+    aspect-ratio: 125/100;
+    display: flex;
+    justify-content: center;
+}
+.puerta_izq{
+    width: 100%;
+    z-index: -1;
+    align-self: stretch;
+    animation: abrir_puerta 5s infinite;
+}
+.puerta_der{
+    width: 100%;
+    z-index: -1;
+    align-self: stretch;
+    animation: cerrar_puerta 5s infinite;
+}
+.boton{
+    align-self: center;
+    justify-self: center;
+}
+.panel{
+    grid-area: display;
+    display: flex;
+    justify-content: center;
+}
+.control{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    align-content: center;
+}
+.display{
+    width: 90%;
+    aspect-ratio: 2 / 1;
+    display: grid;
+    grid-template-columns: auto min-content;
+    grid-template-rows: auto auto;
+    justify-self: center;
+    grid-column: 1 / span 2;
+}
+.disp_piso{
+    grid-column: 1 / span 2;
+}
+#popup{
+    display: none;
+    background-color: white;
+    padding: 10px;
+    z-index: 10;
+    width: 40%;
+    height: 50%;
+    position: fixed;
+    left: 33%;
+    top: 20%;
+}
+
+@keyframes abrir_puerta{
+    from{transform: translateX(0%)}
+    to{transform: translateX(-100%)}
+}
+
+@keyframes cerrar_puerta{
+    from{transform: translateX(0%)}
+    to{transform: translateX(100%)}
+}
