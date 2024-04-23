@@ -72,10 +72,27 @@ function CrearCaja(event){
     nueva_caja.appendChild(nuevo_id);
     nueva_caja.className = "caja";
     nueva_caja.id = "caja" + identificador;
+    nueva_caja.draggable = true;
+    nueva_caja.ondragstart = drag;
     nueva_caja.style.width = (ancho * (100/250)) + "%";
-    nueva_caja.style.height = (largo * (100/250)) + "%";
+    nueva_caja.style.height = (largo * (100/200)) + "%";
     ALMACEN.appendChild(nueva_caja);
     identificador ++;
     ClosePopup();
     return;
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(event) {
+    event.dataTransfer.setData("text/html", event.target.id);
+}
+
+function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("text/html");
+    var draggedElement = document.getElementById(data);
+    event.target.appendChild(draggedElement);
 }
