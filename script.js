@@ -92,7 +92,7 @@ function drag(event) {
 
 function drop(event) {
     event.preventDefault();
-    var data = event.dataTransfer.getData("text/html");
-    var draggedElement = document.getElementById(data);
+    let data = event.dataTransfer.getData("text/html");
+    let draggedElement = document.getElementById(data);
     event.target.appendChild(draggedElement);
 }
