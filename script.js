@@ -94,5 +94,27 @@ function drop(event) {
     event.preventDefault();
     let data = event.dataTransfer.getData("text/html");
     let draggedElement = document.getElementById(data);
-    event.target.appendChild(draggedElement);
+    let box_posx = event.offsetX;
+    let box_posy = event.offsetY;
+    let contenedor_posx = event.target.offsetWidth;
+    let contenedor_posy = event.target.offsetHeight;
+    if(event.target.className == "ascensor"){
+
+        // Movimiento hacia el ascensor
+        if(((box_posx + draggedElement.offsetWidth) > contenedor_posx)||((box_posy + draggedElement.offsetHeight) > contenedor_posy)){return;}
+        draggedElement.style.position="absolute";
+        draggedElement.style.top = box_posy + "px";
+        draggedElement.style.left = box_posx + "px";
+        event.target.appendChild(draggedElement);
+
+    }else if(event.target.className == "almacen"){
+
+        // Movimiento hacia el almacen
+        draggedElement.style.position="relative";
+        draggedElement.style.removeProperty("top");
+        draggedElement.style.removeProperty("left");
+        event.target.appendChild(draggedElement);
+
+    }
+    
 }

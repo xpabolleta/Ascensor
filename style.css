@@ -15,6 +15,7 @@
     width: 75%;
 }
 .almacen{
+    position: relative;
     align-self: self-end;
     aspect-ratio: 125/100;
 }
