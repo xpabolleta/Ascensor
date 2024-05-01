@@ -18,6 +18,7 @@
     position: relative;
     align-self: self-end;
     aspect-ratio: 125/100;
+    overflow: auto;
 }
 .pos_ascensor{
     display: grid;
@@ -35,6 +36,7 @@
 .ascensor{
     position: relative;
     left: -50%;
+    overflow: hidden;
 }
 .puerta_izq{
     width: 100%;
