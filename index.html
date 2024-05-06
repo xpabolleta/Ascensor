@@ -10,11 +10,11 @@
             <form action="" method="post" name="create">
                 <p>Introduce las dimensiones y peso de la caja: </p>
                 <label for="largo"> Largo: </label>
-                <input type="number" id="largo" name="largo"><span> [cm] </span><br><br>
+                <input type="number" step="10" min="10" max="200" id="largo" name="largo"><span> [cm] </span><br><br>
                 <label for="ancho"> Ancho: </label>
-                <input type="number" id="ancho" name="ancho"><span> [cm] </span><br><br>
+                <input type="number" step="10" min="10" max="250" id="ancho" name="ancho"><span> [cm] </span><br><br>
                 <label for="peso"> Peso: </label>
-                <input type="number" id="peso" name="peso"><span> [kg] </span><br><br>
+                <input type="number" step=".1" id="peso" name="peso"><span> [kg] </span><br><br>
                 <input type="submit" id="submit" value="submit">
                 <input type="reset" value="Cancelar" id = "reset">
             </form>
