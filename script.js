@@ -43,6 +43,16 @@ let ascensor = {
                 array.splice(indice,1);
             }
         });
+    },
+    isCaja : function(id){
+        let aux = false;
+        this.carga.forEach(element => {
+            if(element == id){
+                aux = true;
+                return;
+            }
+        });
+        return aux;
     }
 }
 
@@ -60,13 +70,34 @@ function Piso(id){
                 array.splice(indice,1);
             }
         });
-    } 
+    }
+    this.isCaja = function(id){
+        let aux = false;
+        this.carga.forEach(element => {
+            if(element == id){
+                aux = true;
+                return;
+            }
+        });
+        return aux;
+    }
 }
 
-function Caja(id,dimension,posicion){
+function Caja(id,dimension){
 
     this.id = id;
     this.dimension = dimension;
+    
+}
+
+function whereCaja(id){
+    
+    if(ascensor.isCaja(id)){return ascensor;}
+    else if(pisoB.isCaja(id)){return pisoB;}
+    else if(piso1.isCaja(id)){return piso1;}
+    else if(piso2.isCaja(id)){return piso2;}
+    else if(piso3.isCaja(id)){return piso3;}
+    else{return null};
     
 }
 
@@ -98,13 +129,6 @@ function CrearCaja(event){
     let nueva_caja = document.createElement("div");
     let nuevo_id = document.createTextNode(identificador);
 
-    if((largo < 10)||(ancho < 10)){
-
-        alert("Tamaño incorrecto! \n El tamaño minimo es de 10cm");
-        return;
-
-    }
-    
     cajas[identificador] = caja;
     pisoB.añadirCaja("caja" + identificador);
     nueva_caja.appendChild(nuevo_id);
@@ -136,26 +160,68 @@ function drop(event) {
     let box_posy = event.offsetY;
     let contenedor_posx = event.target.offsetWidth;
     let contenedor_posy = event.target.offsetHeight;
-    if(event.target.className == "ascensor"){
+    let pos_caja = whereCaja(draggedElement.id);
+    let pos_target;
 
-        // Movimiento hacia el ascensor
-        if(((box_posx + draggedElement.offsetWidth) > contenedor_posx)||((box_posy + draggedElement.offsetHeight) > contenedor_posy)){return;}
-        draggedElement.style.position="absolute";
-        draggedElement.style.top = box_posy + "px";
-        draggedElement.style.left = box_posx + "px";
-        event.target.appendChild(draggedElement);
-        pisoB.eliminarCaja(draggedElement.id);
-        ascensor.añadirCaja(draggedElement.id);
+    switch(event.target.id){
+        case "almacenB":
+            pos_target = pisoB;
+            break;
+        case "almacen1":
+            pos_target = piso1;
+            break;
+        case "almacen2":
+            pos_target = piso2;
+            break;
+        case "almacen3":
+            pos_target = piso3;
+            break;
+        case "ascensor":
+            pos_target = ascensor;
+            break;
+    }
 
-    }else if(event.target.className == "almacen"){
+    if(ascensor["estado"] != ABIERTO){
+        return;
+    }
 
-        // Movimiento hacia el almacen
+    if((pos_target["id"] != ASCENSOR)&&(ascensor["posicion"] == pos_target["id"])){
+
         draggedElement.style.position="relative";
         draggedElement.style.removeProperty("top");
         draggedElement.style.removeProperty("left");
         event.target.appendChild(draggedElement);
-        ascensor.eliminarCaja(draggedElement.id);
-        pisoB.añadirCaja(draggedElement.id);
-    }
-    
+        pos_caja.eliminarCaja(draggedElement.id);
+        pos_target.añadirCaja(draggedElement.id);
+        
+    }else if((pos_target["id"] == ASCENSOR)&&((pos_caja["id"] == ascensor["posicion"])||(pos_caja["id"] == ASCENSOR))){
+
+        if(((box_posx + draggedElement.offsetWidth) > contenedor_posx)||((box_posy + draggedElement.offsetHeight) > contenedor_posy)){return;}
+        let aux = false;
+        cajas.forEach(element => {
+            let posicion = whereCaja(element["id"]);
+            let caja = document.getElementById(element["id"]);
+            let dragged = draggedElement.getBoundingClientRect();
+            let box = caja.getBoundingClientRect();
+            if(posicion["id"] == ASCENSOR){
+                if(
+                    dragged.left < box.right &&
+                    dragged.right > box.left &&
+                    dragged.top < box.bottom &&
+                    dragged.bottom > box.top
+                ){
+                    aux = true;
+                    return;
+                }
+            }
+        });
+        if(aux){return;}
+        draggedElement.style.position="absolute";
+        draggedElement.style.top = box_posy + "px";
+        draggedElement.style.left = box_posx + "px";
+        event.target.appendChild(draggedElement);
+        pos_caja.eliminarCaja(draggedElement.id);
+        pos_target.añadirCaja(draggedElement.id);
+
+    }    
 }
