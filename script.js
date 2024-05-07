@@ -160,56 +160,58 @@ function drop(event) {
     let box_posy = event.offsetY;
     let contenedor_posx = event.target.offsetWidth;
     let contenedor_posy = event.target.offsetHeight;
-    let pos_caja = whereCaja(draggedElement.id);
-    let pos_target;
+    let origen = whereCaja(draggedElement.id);
+    let destino;
 
     switch(event.target.id){
         case "almacenB":
-            pos_target = pisoB;
+            destino = pisoB;
             break;
         case "almacen1":
-            pos_target = piso1;
+            destino = piso1;
             break;
         case "almacen2":
-            pos_target = piso2;
+            destino = piso2;
             break;
         case "almacen3":
-            pos_target = piso3;
+            destino = piso3;
             break;
         case "ascensor":
-            pos_target = ascensor;
+            destino = ascensor;
             break;
+        default:
+            return;
     }
 
     if(ascensor["estado"] != ABIERTO){
         return;
     }
 
-    if((pos_target["id"] != ASCENSOR)&&(ascensor["posicion"] == pos_target["id"])){
+    if((destino["id"] != ASCENSOR)&&(destino["id"] == ascensor["posicion"])){
 
         draggedElement.style.position="relative";
         draggedElement.style.removeProperty("top");
         draggedElement.style.removeProperty("left");
         event.target.appendChild(draggedElement);
-        pos_caja.eliminarCaja(draggedElement.id);
-        pos_target.añadirCaja(draggedElement.id);
         
-    }else if((pos_target["id"] == ASCENSOR)&&((pos_caja["id"] == ascensor["posicion"])||(pos_caja["id"] == ASCENSOR))){
+        origen.eliminarCaja(draggedElement.id);
+        destino.añadirCaja(draggedElement.id);
+        
+    }else if((destino["id"] == ASCENSOR)&&((origen["id"] == ascensor["posicion"])||(origen["id"] == ASCENSOR))){
 
         if(((box_posx + draggedElement.offsetWidth) > contenedor_posx)||((box_posy + draggedElement.offsetHeight) > contenedor_posy)){return;}
         let aux = false;
         cajas.forEach(element => {
             let posicion = whereCaja(element["id"]);
-            let caja = document.getElementById(element["id"]);
-            let dragged = draggedElement.getBoundingClientRect();
-            let box = caja.getBoundingClientRect();
-            if(posicion["id"] == ASCENSOR){
+            if((posicion["id"] == ASCENSOR)&&(element["id"] != draggedElement.id)){
+                let caja = document.getElementById(element["id"]).getBoundingClientRect();
                 if(
-                    dragged.left < box.right &&
-                    dragged.right > box.left &&
-                    dragged.top < box.bottom &&
-                    dragged.bottom > box.top
+                    event.clientX < caja.right &&
+                    event.clientX + draggedElement.offsetWidth > caja.left &&
+                    event.clientY < caja.bottom &&
+                    event.clientY + draggedElement.offsetHeight > caja.top
                 ){
+                    console.log("colision");
                     aux = true;
                     return;
                 }
@@ -220,8 +222,9 @@ function drop(event) {
         draggedElement.style.top = box_posy + "px";
         draggedElement.style.left = box_posx + "px";
         event.target.appendChild(draggedElement);
-        pos_caja.eliminarCaja(draggedElement.id);
-        pos_target.añadirCaja(draggedElement.id);
+        
+        origen.eliminarCaja(draggedElement.id);
+        destino.añadirCaja(draggedElement.id);
 
     }    
 }
