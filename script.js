@@ -3,8 +3,6 @@ const LARGO = 1;
 const PESO = 2;
 const CERRADO = 0;
 const ABIERTO = 1;
-const ABRIENDO = 2;
-const CERRANDO = 3;
 const PISOB = 0;
 const PISO1 = 1;
 const PISO2 = 2;
@@ -14,13 +12,21 @@ const ASCENSOR = 4;
 const BOTON_CREAR = document.getElementById("crear_caja");
 const PUERTA_IZQ = document.getElementById("puerta_izq");
 const PUERTA_DER = document.getElementById("puerta_der");
+const CARGA = document.getElementById("ascensor");
+const HUECOB = document.getElementById("hueco_ascensorB");
+const HUECO1 = document.getElementById("hueco_ascensor1");
+const HUECO2 = document.getElementById("hueco_ascensor2");
+const HUECO3 = document.getElementById("hueco_ascensor3");
 const FORMULARIO = document.querySelector("form");
 const BOTONES = document.getElementsByClassName("boton");
 const BOTON_B = document.getElementsByClassName("boton_pisoB");
 const BOTON_1 = document.getElementsByClassName("boton_piso1");
 const BOTON_2 = document.getElementsByClassName("boton_piso2");
 const BOTON_3 = document.getElementsByClassName("boton_piso3");
-const ALMACEN = document.getElementById("almacenB");
+const ALMACENB = document.getElementById("almacenB");
+const ALMACEN1 = document.getElementById("almacen1");
+const ALMACEN2 = document.getElementById("almacen2");
+const ALMACEN3 = document.getElementById("almacen3");
 const POPUP = document.getElementById("popup");
 const LED = document.getElementsByClassName("led");
 const LEDB = document.getElementsByClassName("ledB");
@@ -38,7 +44,7 @@ let ascensor = {
     id: ASCENSOR,
     carga: Array(),
     posicion : PISOB, 
-    estado : ABIERTO, 
+    estado : CERRADO, 
     pila : Array(4),
     añadirCaja : function(id){
         if(this.carga.indexOf(id) == -1){
@@ -127,28 +133,39 @@ function main(){
             Array.from(LED).forEach(el => {el.style.background = "";});
             Array.from(LEDB).forEach(el => {el.style.background = "red";});
             Array.from(BOTON_B).forEach(el => {el.style.background = "";});
+            HUECOB.appendChild(PUERTA_IZQ);
+            HUECOB.appendChild(CARGA);
+            HUECOB.appendChild(PUERTA_DER);
             break;
         case PISO1:
             Array.from(LED).forEach(el => {el.style.background = "";});
             Array.from(LED1).forEach(el => {el.style.background = "red";});
             Array.from(BOTON_1).forEach(el => {el.style.background = "";});
+            HUECO1.appendChild(PUERTA_IZQ);
+            HUECO1.appendChild(CARGA);
+            HUECO1.appendChild(PUERTA_DER);
             break;
         case PISO2:
             Array.from(LED).forEach(el => {el.style.background = "";});
             Array.from(LED2).forEach(el => {el.style.background = "red";});
             Array.from(BOTON_2).forEach(el => {el.style.background = "";});
+            HUECO2.appendChild(PUERTA_IZQ);
+            HUECO2.appendChild(CARGA);
+            HUECO2.appendChild(PUERTA_DER);
             break;
         case PISO3:
             Array.from(LED).forEach(el => {el.style.background = "";});
             Array.from(LED3).forEach(el => {el.style.background = "red";});
             Array.from(BOTON_3).forEach(el => {el.style.background = "";});
+            HUECO3.appendChild(PUERTA_IZQ);
+            HUECO3.appendChild(CARGA);
+            HUECO3.appendChild(PUERTA_DER);
             break;
     }
     if(ascensor.pila[0] == ascensor.posicion){
         ascensor.pila.shift();
         ascensor.pila.length = 4;
-        //clearInterval(TEMP_MAIN);
-        //AbrirPuerta();
+        AbrirPuerta();
     }
 }
 function OpenPopup(){
@@ -183,7 +200,7 @@ function CrearCaja(event){
     nueva_caja.ondragstart = drag;
     nueva_caja.style.width = (ancho * (100/250)) + "%";
     nueva_caja.style.height = (largo * (100/200)) + "%";
-    ALMACEN.appendChild(nueva_caja);
+    ALMACENB.appendChild(nueva_caja);
     identificador ++;
     ClosePopup();
     return;
@@ -287,8 +304,14 @@ function Llamada(event){
                 Array.from(boton).forEach(el => {el.style.background = "red";});
                 return;
             }
-        }else{
-            AbrirPuerta();
         }
     }
+    AbrirPuerta();
+}
+function AbrirPuerta(){
+    clearInterval(TEMP_MAIN);
+    ascensor.estado = CERRADO;
+    PUERTA_DER.animate([{transform: 'translateX(0%)'},{transform: 'translateX(100%)'}],{duration: 3000,fill: 'forwards'});
+    PUERTA_IZQ.animate([{transform: 'translateX(0%)'},{transform: 'translateX(-100%)'}],{duration: 3000,fill: 'forwards'});
+    console.log("hola");
 }
