@@ -1,7 +1,7 @@
 #   Ascensor: ToDo list
 ##  ToDo
 ### Main tasks
-
+    - [ ] Revisar la funcion AbrirPuertas() para que detenga el timer del main y ejecute las animaciones de abrir y cerrar
 ### Optional tasks
 ##  In Progress
 ##  Done
