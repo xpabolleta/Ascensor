@@ -42,7 +42,7 @@
     width: 100%;
     z-index: 1;
     align-self: stretch;
-    animation: abrir_puerta 5s infinite;
+    transform: translateX(-100%);
 }
 .puerta_der{
     position: relative;
@@ -50,7 +50,7 @@
     width: 100%;
     z-index: 1;
     align-self: stretch;
-    animation: cerrar_puerta 5s infinite;
+    transform: translateX(100%);
 }
 .boton{
     align-self: center;
@@ -93,12 +93,12 @@
     display: inline-block;
 }
 
-@keyframes abrir_puerta{
+@keyframes mover_izq{
     from{transform: translateX(0%)}
     to{transform: translateX(-100%)}
 }
 
-@keyframes cerrar_puerta{
+@keyframes mover_der{
     from{transform: translateX(0%)}
     to{transform: translateX(100%)}
 }
