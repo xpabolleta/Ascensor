@@ -25,10 +25,58 @@
                 <div class="disp_alarma">A</div>
                 <div class="disp_piso">Piso</div>
             </div>
-            <button class="boton" class="boton_piso2">2</button>
-            <button class="boton" class="boton_piso3">3</button>
-            <button class="boton" class="boton_pisoB">B</button>
-            <button class="boton" class="boton_piso1">1</button>            
+            <button class="boton boton_piso2">2</button>
+            <button class="boton boton_piso3">3</button>
+            <button class="boton boton_pisoB">B</button>
+            <button class="boton boton_piso1">1</button>            
+        </div>
+        <div class="piso" id="piso3">
+            <div class="almacen" id="almacen3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="lista">
+            </div>
+            <div class="pos_ascensor" id="pos_ascensor3">
+                <div class="panel">
+                    <div class="led ledB">B</div>
+                    <div class="led led1">1</div>
+                    <div class="led led2">2</div>
+                    <div class="led led3">3</div>
+                </div>
+                <button class="boton boton_piso3"> B</button>
+                <div class="hueco_ascensor" id="hueco_ascensor3">
+                </div>
+            </div>
+        </div>
+        <div class="piso" id="piso2">
+            <div class="almacen" id="almacen2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="lista">
+            </div>
+            <div class="pos_ascensor" id="pos_ascensor2">
+                <div class="panel">
+                    <div class="led ledB">B</div>
+                    <div class="led led1">1</div>
+                    <div class="led led2">2</div>
+                    <div class="led led3">3</div>
+                </div>
+                <button class="boton boton_piso2"> B</button>
+                <div class="hueco_ascensor" id="hueco_ascensor2">
+                </div>
+            </div>
+        </div>
+        <div class="piso" id="piso1">
+            <div class="almacen" id="almacen1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="lista">
+            </div>
+            <div class="pos_ascensor" id="pos_ascensor1">
+                <div class="panel">
+                    <div class="led ledB">B</div>
+                    <div class="led led1">1</div>
+                    <div class="led led2">2</div>
+                    <div class="led led3">3</div>
+                </div>
+                <button class="boton boton_piso1"> B</button>
+                <div class="hueco_ascensor" id="hueco_ascensor1">
+                </div>
+            </div>
         </div>
         <div class="piso" id="pisoB">
             <div class="almacen" id="almacenB" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
@@ -37,16 +85,16 @@
             </div>
             <div class="pos_ascensor" id="pos_ascensorB">
                 <div class="panel">
-                    <div class="led">B</div>
-                    <div class="led">1</div>
-                    <div class="led">2</div>
-                    <div class="led">3</div>
+                    <div class="led ledB">B</div>
+                    <div class="led led1">1</div>
+                    <div class="led led2">2</div>
+                    <div class="led led3">3</div>
                 </div>
-                <button class="boton" id="boton_piso3"> B</button>
+                <button class="boton boton_pisoB"> B</button>
                 <div class="hueco_ascensor" id="hueco_ascensorB">
-                    <div class="puerta_izq"></div>
+                    <div class="puerta_izq" id="puerta_izq"></div>
                     <div class="ascensor" id="ascensor" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                    <div class="puerta_der"></div>
+                    <div class="puerta_der" id="puerta_der"></div>
                 </div>
             </div>
         </div>
