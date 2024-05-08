@@ -12,13 +12,21 @@ const PISO3 = 3;
 const ASCENSOR = 4;
 
 const BOTON_CREAR = document.getElementById("crear_caja");
+const PUERTA_IZQ = document.getElementById("puerta_izq");
+const PUERTA_DER = document.getElementById("puerta_der");
 const FORMULARIO = document.querySelector("form");
-const BOTON_B = document.getElementById("boton_pisoB");
-const BOTON_1 = document.getElementById("boton_piso1");
-const BOTON_2 = document.getElementById("boton_piso2");
-const BOTON_3 = document.getElementById("boton_piso3");
+const BOTONES = document.getElementsByClassName("boton");
+const BOTON_B = document.getElementsByClassName("boton_pisoB");
+const BOTON_1 = document.getElementsByClassName("boton_piso1");
+const BOTON_2 = document.getElementsByClassName("boton_piso2");
+const BOTON_3 = document.getElementsByClassName("boton_piso3");
 const ALMACEN = document.getElementById("almacenB");
 const POPUP = document.getElementById("popup");
+const LED = document.getElementsByClassName("led");
+const LEDB = document.getElementsByClassName("ledB");
+const LED1 = document.getElementsByClassName("led1");
+const LED2 = document.getElementsByClassName("led2");
+const LED3 = document.getElementsByClassName("led3");
 
 let cajas = Array();
 let identificador = 0;
@@ -31,7 +39,7 @@ let ascensor = {
     carga: Array(),
     posicion : PISOB, 
     estado : ABIERTO, 
-    pila : Array(),
+    pila : Array(4),
     añadirCaja : function(id){
         if(this.carga.indexOf(id) == -1){
             this.carga.push(id);
@@ -100,11 +108,49 @@ function whereCaja(id){
     else{return null};
     
 }
-
+let TEMP_MAIN = setInterval(main,4000);
 BOTON_CREAR.addEventListener("click", OpenPopup);
 FORMULARIO.addEventListener("submit", CrearCaja);
 FORMULARIO.addEventListener("reset", ClosePopup);
+Array.from(BOTONES).forEach(el => {el.addEventListener("click", Llamada);});
 
+
+function main(){
+    if(ascensor.pila.every(el => el == null)){return;}
+    if((ascensor.pila[0] - ascensor.posicion) > 0){
+        ascensor.posicion++;
+    }else{
+        ascensor.posicion--;
+    }
+    switch(ascensor.posicion){
+        case PISOB:
+            Array.from(LED).forEach(el => {el.style.background = "";});
+            Array.from(LEDB).forEach(el => {el.style.background = "red";});
+            Array.from(BOTON_B).forEach(el => {el.style.background = "";});
+            break;
+        case PISO1:
+            Array.from(LED).forEach(el => {el.style.background = "";});
+            Array.from(LED1).forEach(el => {el.style.background = "red";});
+            Array.from(BOTON_1).forEach(el => {el.style.background = "";});
+            break;
+        case PISO2:
+            Array.from(LED).forEach(el => {el.style.background = "";});
+            Array.from(LED2).forEach(el => {el.style.background = "red";});
+            Array.from(BOTON_2).forEach(el => {el.style.background = "";});
+            break;
+        case PISO3:
+            Array.from(LED).forEach(el => {el.style.background = "";});
+            Array.from(LED3).forEach(el => {el.style.background = "red";});
+            Array.from(BOTON_3).forEach(el => {el.style.background = "";});
+            break;
+    }
+    if(ascensor.pila[0] == ascensor.posicion){
+        ascensor.pila.shift();
+        ascensor.pila.length = 4;
+        //clearInterval(TEMP_MAIN);
+        //AbrirPuerta();
+    }
+}
 function OpenPopup(){
 
     POPUP.style.display = "block";
@@ -117,7 +163,6 @@ function ClosePopup(){
     return;
 
 }
-
 function CrearCaja(event){
 
     event.preventDefault();
@@ -143,15 +188,12 @@ function CrearCaja(event){
     ClosePopup();
     return;
 }
-
 function allowDrop(event) {
     event.preventDefault();
 }
-
 function drag(event) {
     event.dataTransfer.setData("text/html", event.target.id);
 }
-
 function drop(event) {
     event.preventDefault();
     let data = event.dataTransfer.getData("text/html");
@@ -164,23 +206,12 @@ function drop(event) {
     let destino;
 
     switch(event.target.id){
-        case "almacenB":
-            destino = pisoB;
-            break;
-        case "almacen1":
-            destino = piso1;
-            break;
-        case "almacen2":
-            destino = piso2;
-            break;
-        case "almacen3":
-            destino = piso3;
-            break;
-        case "ascensor":
-            destino = ascensor;
-            break;
-        default:
-            return;
+        case "almacenB": destino = pisoB;break;
+        case "almacen1": destino = piso1;break;
+        case "almacen2": destino = piso2;break;
+        case "almacen3": destino = piso3;break;
+        case "ascensor": destino = ascensor;break;
+        default: return;
     }
 
     if(ascensor["estado"] != ABIERTO){
@@ -227,4 +258,37 @@ function drop(event) {
         destino.añadirCaja(draggedElement.id);
 
     }    
+}
+function Llamada(event){
+    let boton = event.target;
+    let llamada;
+    switch(boton.className){
+        case "boton boton_pisoB":
+            llamada = PISOB;
+            break;
+        case "boton boton_piso1":
+            llamada = PISO1;
+            break;
+        case "boton boton_piso2":
+            llamada = PISO2;
+            break;
+        case "boton boton_piso3":
+            llamada = PISO3;
+            break;
+        
+    }
+    boton = document.getElementsByClassName(boton.className);
+    for(let i = 0; i<4;i++){
+        if(ascensor.posicion != llamada){
+            if(ascensor.pila[i] == llamada){
+                return;
+            }else if(ascensor.pila[i] == null){
+                ascensor.pila[i] = llamada;
+                Array.from(boton).forEach(el => {el.style.background = "red";});
+                return;
+            }
+        }else{
+            AbrirPuerta();
+        }
+    }
 }
