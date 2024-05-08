@@ -42,7 +42,6 @@
     width: 100%;
     z-index: 1;
     align-self: stretch;
-    transform: translateX(-100%);
 }
 .puerta_der{
     position: relative;
@@ -50,7 +49,6 @@
     width: 100%;
     z-index: 1;
     align-self: stretch;
-    transform: translateX(100%);
 }
 .boton{
     align-self: center;
