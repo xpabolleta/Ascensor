@@ -1,24 +1,39 @@
-[class],#popup{
+[class]:not(.almacen,.lista,.panel),#popup{
     border: 1px solid black;
+}
+[class],#popup{
     margin: 5px;
 }
 body{
-    background-image: url("media/textures/citywithtrain.gif");
+    background-image: url("media/textures/cityneon.png");
     background-size: cover;
 }
 .control{
-    width: 15%;
+    background: linear-gradient(
+        45deg,
+        #999 5%,
+        #fff 10%,
+        #ccc 30%,
+        #ddd 50%,
+        #ccc 70%,
+        #fff 80%,
+        #999 95%
+      );
+    width: 10%;
     position: fixed;
     right: 5%;
     top: 5%;
     font-family: 'Digital-7';
     text-align: center;
+    color: red;
 }
 .piso{
+    margin: 0px !important;
     display: grid;
     grid-template-columns: 35% 25% 40%;
     grid-template-rows: auto;
     width: 75%;
+    background-color:#4A3B44;
     background-image: url("media/textures/concretewall.png");
     background-repeat: repeat;
 }
@@ -29,6 +44,16 @@ body{
     overflow: auto;
 }
 .pos_ascensor{
+    background: linear-gradient(
+        45deg,
+        #999 5%,
+        #fff 10%,
+        #ccc 30%,
+        #ddd 50%,
+        #ccc 70%,
+        #fff 80%,
+        #999 95%
+      );
     display: grid;
     grid-template-columns: min-content auto;
     grid-template-rows: auto auto;
@@ -42,16 +67,38 @@ body{
     grid-template-columns: 50% 100% 50%;
 }
 .ascensor{
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
     position: relative;
     left: -50%;
     overflow: hidden;
 }
 .puerta_izq{
+    background: linear-gradient(
+        45deg,
+        #999 5%,
+        #fff 10%,
+        #ccc 30%,
+        #ddd 50%,
+        #ccc 70%,
+        #fff 80%,
+        #999 95%
+      );
     width: 100%;
     z-index: 1;
     align-self: stretch;
 }
 .puerta_der{
+    background: linear-gradient(
+        45deg,
+        #999 5%,
+        #fff 10%,
+        #ccc 30%,
+        #ddd 50%,
+        #ccc 70%,
+        #fff 80%,
+        #999 95%
+      );
     position: relative;
     left: -200%;
     width: 100%;
@@ -61,6 +108,11 @@ body{
 .boton{
     align-self: center;
     justify-self: center;
+    color: #fff;
+    background-color: grey;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 .panel{
     grid-column: 2;
@@ -68,9 +120,11 @@ body{
     justify-content: center;
 }
 .led{
+    background-color: black;
     width: 5%;
     font-family: 'Digital-7';
     text-align: center;
+    color: black;
 }
 .control{
     display: grid;
@@ -78,6 +132,7 @@ body{
     grid-template-rows: auto auto auto;
 }
 .display{
+    background-color: black;
     width: 70%;
     display: grid;
     grid-template-columns: auto min-content;
@@ -100,6 +155,8 @@ body{
     top: 20%;
 }
 .caja{
+    background-image: url("media/textures/texturacaja.jpg");
+    background-repeat: repeat;
     background-color: red;
     display: inline-block;
 }

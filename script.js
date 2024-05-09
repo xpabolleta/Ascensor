@@ -135,32 +135,32 @@ function main(){
     }
     switch(ascensor.posicion){
         case PISOB:
-            Array.from(LED).forEach(el => {el.style.background = "";});
-            Array.from(LEDB).forEach(el => {el.style.background = "red";});
+            Array.from(LED).forEach(el => {el.style.color = "black";});
+            Array.from(LEDB).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_B).forEach(el => {el.style.background = "";});
             HUECOB.appendChild(PUERTA_IZQ);
             HUECOB.appendChild(CARGA);
             HUECOB.appendChild(PUERTA_DER);
             break;
         case PISO1:
-            Array.from(LED).forEach(el => {el.style.background = "";});
-            Array.from(LED1).forEach(el => {el.style.background = "red";});
+            Array.from(LED).forEach(el => {el.style.color = "black";});
+            Array.from(LED1).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_1).forEach(el => {el.style.background = "";});
             HUECO1.appendChild(PUERTA_IZQ);
             HUECO1.appendChild(CARGA);
             HUECO1.appendChild(PUERTA_DER);
             break;
         case PISO2:
-            Array.from(LED).forEach(el => {el.style.background = "";});
-            Array.from(LED2).forEach(el => {el.style.background = "red";});
+            Array.from(LED).forEach(el => {el.style.color = "black";});
+            Array.from(LED2).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_2).forEach(el => {el.style.background = "";});
             HUECO2.appendChild(PUERTA_IZQ);
             HUECO2.appendChild(CARGA);
             HUECO2.appendChild(PUERTA_DER);
             break;
         case PISO3:
-            Array.from(LED).forEach(el => {el.style.background = "";});
-            Array.from(LED3).forEach(el => {el.style.background = "red";});
+            Array.from(LED).forEach(el => {el.style.color = "black";});
+            Array.from(LED3).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_3).forEach(el => {el.style.background = "";});
             HUECO3.appendChild(PUERTA_IZQ);
             HUECO3.appendChild(CARGA);
