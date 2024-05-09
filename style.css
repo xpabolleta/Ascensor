@@ -90,13 +90,3 @@
     background-color: red;
     display: inline-block;
 }
-
-@keyframes mover_izq{
-    from{transform: translateX(0%)}
-    to{transform: translateX(-100%)}
-}
-
-@keyframes mover_der{
-    from{transform: translateX(0%)}
-    to{transform: translateX(100%)}
-}
