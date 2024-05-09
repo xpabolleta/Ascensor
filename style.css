@@ -1,4 +1,4 @@
-[class]:not(.almacen,.lista,.panel),#popup{
+[class]:not(.almacen,.lista,.panel,.planta,.cartel,.neonText),#popup{
     border: 1px solid black;
 }
 [class],#popup{
@@ -7,6 +7,56 @@
 body{
     background-image: url("media/textures/cityneon.png");
     background-size: cover;
+}
+.neonText {
+    color: #fff;
+}
+h1 {
+    animation: flicker1 1.5s infinite alternate;
+    font-size: 10vw;
+}
+@keyframes flicker1 {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+        0 0 11px #fff,
+        0 0 10px #c92e3b,
+        0 0 30px #c92e3b,
+        0 0 35px #c92e3b,
+        0 0 20px #c92e3b,
+        0 0 27px #c92e3b;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+@keyframes flicker2 {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+        0 0 11px #fff,
+        0 0 10px cyan,
+        0 0 30px cyan,
+        0 0 35px cyan,
+        0 0 20px cyan,
+        0 0 27px cyan;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+h2 {
+    animation: flicker2 1.5s infinite alternate;
+    font-size: 1.3vw;
+}
+.cartel {
+    background-image: url("media/textures/valla");
+    margin-top: 7%;
+    font-family: "Helvetica Neue", sans-serif;
+    width: 30%;
+    margin-left: 25%;
+}
+h1, h2 {
+    text-align: center;
+    font-weight: 400;
 }
 .control{
     background: linear-gradient(
@@ -22,7 +72,7 @@ body{
     width: 10%;
     position: fixed;
     right: 5%;
-    top: 5%;
+    top: 40%;
     font-family: 'Digital-7';
     text-align: center;
     color: red;
@@ -34,7 +84,8 @@ body{
     grid-template-rows: auto;
     width: 75%;
     background-color:#4A3B44;
-    background-image: url("media/textures/concretewall.png");
+    background-image: url("media/textures/piso.png");
+    background-size: 100% 100%;
     background-repeat: repeat;
 }
 .almacen{
@@ -43,7 +94,25 @@ body{
     aspect-ratio: 125/100;
     overflow: auto;
 }
+.lista{
+    position: relative;
+}
+.planta{
+    color: goldenrod;
+    justify-self: center;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    width: fit-content;
+    text-shadow: 2px 2px black;
+}
+#crear_caja{
+    position:absolute;
+    bottom: 5px;
+    left: 5px;
+}
 .pos_ascensor{
+    margin: 0px !important;
     background: linear-gradient(
         45deg,
         #999 5%,
