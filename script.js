@@ -285,8 +285,17 @@ function drop(event) {
         
         origen.eliminarCaja(draggedElement.id);
         destino.añadirCaja(draggedElement.id);
-
-    }    
+    }
+    let peso = 0;
+        ascensor.carga.forEach(carga => {
+            cajas.forEach(caja => {
+                if(carga == caja.id){
+                    peso = peso + parseInt(caja["dimension"][PESO]);
+                    return;
+                }
+            });
+        });
+        DISP_PESO.textContent = peso.toString() + "kg";    
 }
 function Llamada(event){
     let boton = event.target;
