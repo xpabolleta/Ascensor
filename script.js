@@ -34,6 +34,11 @@ const LED1 = document.getElementsByClassName("led1");
 const LED2 = document.getElementsByClassName("led2");
 const LED3 = document.getElementsByClassName("led3");
 
+let TEMP_MAIN;
+let TMR_ABRIR;
+let TMR_CERRAR;
+let TMR_ESPERA;
+
 let cajas = Array();
 let identificador = 0;
 let piso3 = new Piso(PISO3);
@@ -114,7 +119,7 @@ function whereCaja(id){
     else{return null};
     
 }
-let TEMP_MAIN = setInterval(main,4000);
+TEMP_MAIN = setInterval(main,4000);
 BOTON_CREAR.addEventListener("click", OpenPopup);
 FORMULARIO.addEventListener("submit", CrearCaja);
 FORMULARIO.addEventListener("reset", ClosePopup);
@@ -309,9 +314,34 @@ function Llamada(event){
     AbrirPuerta();
 }
 function AbrirPuerta(){
+    clearTimeout(TMR_ESPERA);
     clearInterval(TEMP_MAIN);
+    TEMP_MAIN = null;
     ascensor.estado = CERRADO;
+    console.log("cerrado");
+    if(TMR_ABRIR != null){return;}
     PUERTA_DER.animate([{transform: 'translateX(0%)'},{transform: 'translateX(100%)'}],{duration: 3000,fill: 'forwards'});
     PUERTA_IZQ.animate([{transform: 'translateX(0%)'},{transform: 'translateX(-100%)'}],{duration: 3000,fill: 'forwards'});
-    console.log("hola");
+    TMR_ABRIR = setTimeout(
+        function(){
+            TMR_ABRIR = null;
+            ascensor.estado = ABIERTO;
+            console.log("abierto");
+            TMR_ESPERA = setTimeout(
+                function(){
+                    TMR_ESPERA = null;
+                    ascensor.estado = CERRADO;
+                    console.log("cerrado");
+                    PUERTA_DER.animate([{transform: 'translateX(100%)'},{transform: 'translateX(0%)'}],{duration: 3000,fill: 'forwards'});
+                    PUERTA_IZQ.animate([{transform: 'translateX(-100%)'},{transform: 'translateX(0%)'}],{duration: 3000,fill: 'forwards'}); 
+                    TMR_CERRAR = setTimeout(
+                        function(){
+                            if((TMR_ABRIR==null)&&TMR_ESPERA==null){
+                                console.log("finish");
+                                TEMP_MAIN = setInterval(main,4000);
+                            }
+                        },3000);
+                },4000)
+        },3000);
+    
 }
