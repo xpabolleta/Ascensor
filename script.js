@@ -9,6 +9,9 @@ const PISO2 = 2;
 const PISO3 = 3;
 const ASCENSOR = 4;
 
+const DISP_PISO = document.getElementById("disp_piso");
+const DISP_PESO = document.getElementById("disp_peso");
+const DISP_ALARMA = document.getElementById("disp_alarma");
 const BOTON_CREAR = document.getElementById("crear_caja");
 const PUERTA_IZQ = document.getElementById("puerta_izq");
 const PUERTA_DER = document.getElementById("puerta_der");
@@ -138,6 +141,7 @@ function main(){
             Array.from(LED).forEach(el => {el.style.color = "black";});
             Array.from(LEDB).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_B).forEach(el => {el.style.background = "";});
+            DISP_PISO.textContent = "PLANTA BAJA";
             HUECOB.appendChild(PUERTA_IZQ);
             HUECOB.appendChild(CARGA);
             HUECOB.appendChild(PUERTA_DER);
@@ -146,6 +150,7 @@ function main(){
             Array.from(LED).forEach(el => {el.style.color = "black";});
             Array.from(LED1).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_1).forEach(el => {el.style.background = "";});
+            DISP_PISO.textContent = "PLANTA 1";
             HUECO1.appendChild(PUERTA_IZQ);
             HUECO1.appendChild(CARGA);
             HUECO1.appendChild(PUERTA_DER);
@@ -154,6 +159,7 @@ function main(){
             Array.from(LED).forEach(el => {el.style.color = "black";});
             Array.from(LED2).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_2).forEach(el => {el.style.background = "";});
+            DISP_PISO.textContent = "PLANTA 2";
             HUECO2.appendChild(PUERTA_IZQ);
             HUECO2.appendChild(CARGA);
             HUECO2.appendChild(PUERTA_DER);
@@ -162,6 +168,7 @@ function main(){
             Array.from(LED).forEach(el => {el.style.color = "black";});
             Array.from(LED3).forEach(el => {el.style.color = "red";});
             Array.from(BOTON_3).forEach(el => {el.style.background = "";});
+            DISP_PISO.textContent = "PLANTA 3";
             HUECO3.appendChild(PUERTA_IZQ);
             HUECO3.appendChild(CARGA);
             HUECO3.appendChild(PUERTA_DER);
