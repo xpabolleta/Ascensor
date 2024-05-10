@@ -41,6 +41,8 @@ let TEMP_MAIN;
 let TMR_ABRIR;
 let TMR_CERRAR;
 let TMR_ESPERA;
+let SONIDO = new Audio("media/sound/alert.mp3");
+SONIDO.loop = true;
 
 let cajas = Array();
 let identificador = 0;
@@ -75,7 +77,20 @@ let ascensor = {
             }
         });
         return aux;
+    },
+    getCarga : function(){
+        let peso = 0;
+        this.carga.forEach(carga => {
+            cajas.forEach(caja => {
+                if(carga == caja.id){
+                    peso = peso + parseInt(caja["dimension"][PESO]);
+                    return;
+                }
+            });
+        });
+        return peso;
     }
+    
 }
 
 function Piso(id){
@@ -130,7 +145,7 @@ Array.from(BOTONES).forEach(el => {el.addEventListener("click", Llamada);});
 
 
 function main(){
-    if(ascensor.pila.every(el => el == null)){return;}
+    if((ascensor.pila.every(el => el == null))&&(ascensor.getCarga >= 5000)){return;}
     if((ascensor.pila[0] - ascensor.posicion) > 0){
         ascensor.posicion++;
     }else{
@@ -286,16 +301,15 @@ function drop(event) {
         origen.eliminarCaja(draggedElement.id);
         destino.añadirCaja(draggedElement.id);
     }
-    let peso = 0;
-        ascensor.carga.forEach(carga => {
-            cajas.forEach(caja => {
-                if(carga == caja.id){
-                    peso = peso + parseInt(caja["dimension"][PESO]);
-                    return;
-                }
-            });
-        });
-        DISP_PESO.textContent = peso.toString() + "kg";    
+    let peso = ascensor.getCarga();
+    DISP_PESO.textContent = peso.toString() + "kg";
+    if(peso >= 5000){
+        DISP_ALARMA.style.color = "red";
+        SONIDO.play();
+    }else{
+        DISP_ALARMA.style.color = "black";
+        SONIDO.pause();
+    }
 }
 function Llamada(event){
     let boton = event.target;

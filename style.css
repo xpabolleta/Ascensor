@@ -75,7 +75,12 @@ h1, h2 {
     top: 40%;
     font-family: 'Digital-7';
     text-align: center;
+}
+.disp_piso,.disp_peso{
     color: red;
+}
+.disp_alarma{
+    color: black;
 }
 .piso{
     margin: 0px !important;
