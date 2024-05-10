@@ -146,11 +146,11 @@ Array.from(BOTONES).forEach(el => {el.addEventListener("click", Llamada);});
 
 
 function main(){
-    if((ascensor.pila.every(el => el == null))&&(ascensor.getCarga >= 5000)){return;}
+    if((ascensor.pila.every(el => el == null))||(ascensor.getCarga >= 5000)){return;}
     ascensor.movimiento = true;
     if((ascensor.pila[0] - ascensor.posicion) > 0){
         ascensor.posicion++;
-    }else{
+    }else if((ascensor.pila[0] - ascensor.posicion) < 0){
         ascensor.posicion--;
     }
     switch(ascensor.posicion){

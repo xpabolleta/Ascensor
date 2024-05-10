@@ -215,6 +215,9 @@ h1, h2 {
     text-align: center;
     color: black;
 }
+.ledB{
+    color: red;
+}
 .control{
     display: grid;
     grid-template-columns: auto auto;
