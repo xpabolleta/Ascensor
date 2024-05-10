@@ -13,7 +13,7 @@ body{
 }
 h1 {
     animation: flicker1 1.5s infinite alternate;
-    font-size: 10vw;
+    font-size: 9vw;
 }
 @keyframes flicker1 {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
@@ -45,10 +45,12 @@ h1 {
 }
 h2 {
     animation: flicker2 1.5s infinite alternate;
+    animation-delay: 0.75s;
     font-size: 1.3vw;
 }
 .cartel {
-    background-image: url("media/textures/valla");
+    background-image: url("media/textures/cartel.png");
+    background-size: cover;
     margin-top: 7%;
     font-family: "Helvetica Neue", sans-serif;
     width: 30%;
@@ -102,19 +104,32 @@ h1, h2 {
 .lista{
     position: relative;
 }
+.cuadro{
+    border: 0px !important;
+    background-color: beige;
+    background-image: url("media/textures/cuadro.png");
+    background-size: 100% 100%;
+    text-align: center;
+    font-size: 1vw;
+    font-family: 'Dancing Script';
+    position: absolute;
+    right: 5%;
+    top: 25%;
+    width: 45%;
+    aspect-ratio: 1 / 1;
+    padding: 10%;
+}
 .planta{
     color: goldenrod;
-    justify-self: center;
     text-align: center;
-    font-size: 30px;
+    font-size: 2vw;
     font-weight: bold;
-    width: fit-content;
     text-shadow: 2px 2px black;
 }
 #crear_caja{
     position:absolute;
-    bottom: 5px;
-    left: 5px;
+    bottom: 50%;
+    left: 50%;
 }
 .pos_ascensor{
     margin: 0px !important;
@@ -236,5 +251,9 @@ h1, h2 {
 }
 @font-face {
     font-family: 'Digital-7';
-    src: url('media/fonts/digital-7.ttf') format('truetype');
+    src: url('media/fonts/digital-7.ttf');
+}
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('media/fonts/DancingScript-Regular.ttf');
 }

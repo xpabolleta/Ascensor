@@ -53,7 +53,8 @@ let pisoB = new Piso(PISOB);
 let ascensor = {
     id: ASCENSOR,
     carga: Array(),
-    posicion : PISOB, 
+    posicion : PISOB,
+    movimiento: false, 
     estado : CERRADO, 
     pila : Array(4),
     añadirCaja : function(id){
@@ -146,6 +147,7 @@ Array.from(BOTONES).forEach(el => {el.addEventListener("click", Llamada);});
 
 function main(){
     if((ascensor.pila.every(el => el == null))&&(ascensor.getCarga >= 5000)){return;}
+    ascensor.movimiento = true;
     if((ascensor.pila[0] - ascensor.posicion) > 0){
         ascensor.posicion++;
     }else{
@@ -190,6 +192,7 @@ function main(){
             break;
     }
     if(ascensor.pila[0] == ascensor.posicion){
+        ascensor.movimiento = false;
         ascensor.pila.shift();
         ascensor.pila.length = 4;
         AbrirPuerta();
@@ -217,7 +220,7 @@ function CrearCaja(event){
     let caja = new Caja(("caja" + identificador),dimension);
     let nueva_caja = document.createElement("div");
     let nuevo_id = document.createTextNode(identificador);
-
+    if((largo < 10)&&(ancho < 10)&&(peso < 10)){return;}
     cajas[identificador] = caja;
     pisoB.añadirCaja("caja" + identificador);
     nueva_caja.appendChild(nuevo_id);
@@ -331,7 +334,7 @@ function Llamada(event){
     }
     boton = document.getElementsByClassName(boton.className);
     for(let i = 0; i<4;i++){
-        if(ascensor.posicion != llamada){
+        if((ascensor.posicion != llamada)||(ascensor.movimiento)){
             if(ascensor.pila[i] == llamada){
                 return;
             }else if(ascensor.pila[i] == null){
@@ -341,6 +344,7 @@ function Llamada(event){
             }
         }
     }
+    if(ascensor.movimiento){return;}
     AbrirPuerta();
 }
 function AbrirPuerta(){
